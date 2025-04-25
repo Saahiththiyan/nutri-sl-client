@@ -1,0 +1,32 @@
+{
+  "name": "nutri-sl-mobile",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.20",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/stack": "^6.3.29",
+    "@supabase/supabase-js": "^2.43.4",
+    "base64-arraybuffer": "^1.0.2",
+    "expo": "~51.0.10",
+    "expo-image-picker": "~15.0.7",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.1",
+    "react-native-dotenv": "^3.4.11",
+    "react-native-safe-area-context": "^4.10.4",
+    "react-native-screens": "^3.31.1",
+    "react-native-vector-icons": "^10.1.0",
+    "expo-file-system": "~17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}
