@@ -39,7 +39,7 @@ const ChatScreen = ({ route }) => {
   const sendMessage = async () => {
     if (newMessage.trim() === '') return;
     try {
-      const { error } = await supabase.from('messages').insert([{ sender_id: userId, receiver_id: 'be9fe8ee-00ea-4e6d-b5a8-d50fcc7b666c', content: newMessage }]);
+      const { error } = await supabase.from('messages').insert([{ sender_id: userId, receiver_id: '26a2d782-dab5-4b0b-ac98-d211a92cc65a', content: newMessage }]);
       if (error) {
         console.error(error);
       } else {
