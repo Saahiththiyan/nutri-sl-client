@@ -101,7 +101,7 @@ const ProgressScreen = () => {
 
 
       const { data, error } = await supabase.storage
-        .from('fitsl')
+        .from('nutrisl')
         .upload(`client-images/${fileName}`, decode(base64), {
           contentType
         });
@@ -109,7 +109,7 @@ const ProgressScreen = () => {
       if (error) throw error;
 
       const { data: {publicUrl}, error: urlError } = supabase.storage
-        .from('fitsl')
+        .from('nutrisl')
         .getPublicUrl(`client-images/${fileName}`);
 
       if (urlError) throw urlError;

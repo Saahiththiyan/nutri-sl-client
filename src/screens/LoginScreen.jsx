@@ -25,7 +25,7 @@ const LoginScreen = ({ navigation }) => {
         .from('profiles')
         .select('*')
         .eq('id', data.user.id)
-        .single();
+        .limit(1);
 
       if (profileError) {
         setError(profileError.message);
