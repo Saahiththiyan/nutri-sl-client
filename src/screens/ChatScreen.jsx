@@ -4,9 +4,9 @@ import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet, Keyboard
 import supabase from '../supabaseClient';
 
 const ChatScreen = ({ route }) => {
-  const  userId  = '4182f0bd-0b6b-4042-82bb-79ee2c7d0418';
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const [userId, setUserId] = useState('');
   const flatListRef = useRef();
 
   useEffect(() => {
@@ -21,6 +21,14 @@ const ChatScreen = ({ route }) => {
     return () => {
       supabase.removeChannel(subscription);
     };
+  }, []);
+
+  useEffect(() => {
+    const getUserId = async () => {
+      const user = await supabase.auth.getUser();
+      setUserId(user.data.user.id);
+    };
+    getUserId();
   }, []);
 
   const fetchMessages = async () => {
@@ -39,7 +47,7 @@ const ChatScreen = ({ route }) => {
   const sendMessage = async () => {
     if (newMessage.trim() === '') return;
     try {
-      const { error } = await supabase.from('messages').insert([{ sender_id: userId, receiver_id: '26a2d782-dab5-4b0b-ac98-d211a92cc65a', content: newMessage }]);
+      const { error } = await supabase.from('messages').insert([{ client_id: userId, admin_id: '26a2d782-dab5-4b0b-ac98-d211a92cc65a', content: newMessage, sender: 'client' }]);
       if (error) {
         console.error(error);
       } else {
@@ -51,9 +59,11 @@ const ChatScreen = ({ route }) => {
   };
 
   const renderItem = ({ item }) => (
-    <View style={[styles.messageContainer, item.sender_id === userId ? styles.userMessage : styles.otherMessage]}>
+    item.admin_id === '26a2d782-dab5-4b0b-ac98-d211a92cc65a' && item.client_id === userId && (
+    <View style={[styles.messageContainer, item.sender === 'client' ? styles.userMessage : styles.otherMessage]}>
       <Text style={styles.messageText}>{item.content}</Text>
     </View>
+  )
   );
 
   return (
